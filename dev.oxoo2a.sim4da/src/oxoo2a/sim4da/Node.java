@@ -3,7 +3,7 @@ package oxoo2a.sim4da;
 public abstract class Node {
 
     public Node ( int my_id ) {
-        id = my_id;
+        this.myId = my_id;
         stop = false;
         t_main = new Thread(this::main);
     }
@@ -21,33 +21,29 @@ public abstract class Node {
         catch (InterruptedException e) {};
     }
 
-    protected int myId() {
-        return id;
-    }
-
     protected int numberOfNodes() { return network.numberOfNodes(); };
 
     protected boolean stillSimulating () {
         return !stop;
     }
     protected void sendUnicast ( int receiver_id, String m ) {
-        network.unicast(id,receiver_id,m);
+        network.unicast(myId,receiver_id,m);
     }
 
     protected void sendUnicast ( int receiver_id, Message m ) {
-        network.unicast(id,receiver_id, m.toJson());
+        network.unicast(myId,receiver_id, m.toJson());
     }
 
     protected void sendBroadcast ( String m ) {
-        network.broadcast(id,m);
+        network.broadcast(myId,m);
     }
 
     protected void sendBroadcast ( Message m ) {
-        network.broadcast(id,m.toJson());
+        network.broadcast(myId,m.toJson());
     }
 
     protected Network.Message receive () {
-        return network.receive(id);
+        return network.receive(myId);
     }
 
     // Module implements basic node functionality
@@ -61,7 +57,7 @@ public abstract class Node {
         catch (InterruptedException ignored) {};
     }
 
-    private final int id;
+    protected final int myId;
     private Network network;
     private final Thread t_main;
     private boolean stop;

@@ -23,7 +23,7 @@ Extending class `Node` enables the implementation of the intended distributed al
 
 Inside `main`, the following methods are available:
 
-- `myId()`: returns the `id` of the given node
+- `myId`: returns the `id` of the given node
 - `numberOfNodes()`: returns the total number of nodes in the network
 - `sendUnicast(recv_id,String message)`: sending a raw string `message` to node `recv_id`
 - `sendUnicast(recv_id,Message message)`: sending a `HashMap`-like message encoded in JSON to node `recv_id`
