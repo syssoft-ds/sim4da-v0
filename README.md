@@ -11,9 +11,9 @@ The simulator strives to abstract from most of the details in network programmin
     s.runSimulation(duration);
 ```
 
-By instantiating a Simulator object, a network of `n_nodes` is created. For each node id between `[n,n_nodes)` the code for the given id must be attached to the simulator. This `ApplicationNode` is derived from the abstract class `Node` which provides the required functionailty for implementing the algorithm simulation (see below). Finally, the simulation can be executed for `duration` seconds.
+By instantiating a Simulator object, a network of `n_nodes` is created. For each node `id` between `[n,n_nodes)` the code for the given id must be attached to the simulator. This `ApplicationNode` is derived from the abstract class `Node` which provides the required functionailty for implementing the algorithm simulation (see below). Finally, the simulation can be executed for `duration` seconds.
 
-Extending class `Node` enables the implementation of the intended distributed algorith by implementing the method `main`:
+Extending class `Node` enables the implementation of the intended distributed algorithm by implementing the method `main`:
 
 ```Java
     public void main () {
@@ -29,4 +29,4 @@ Inside `main`, the following methods are available:
 - `sendBroadcast(String message)`: sending a raw string `message` to all nodes (except the sender itself)
 - `sendBroadcast(Message message)`: sending a `HashMap`-like message encoded in JSON to all nodes (except the sender itself)
 - `stillSimulating()`: returns `true` while the duration for the simulation is not exceeded
-- `receive()`: blocks until a message is received by the node; an object of type `Network.Message` is returned, which stores `sender_id`, `receiver_id`, send mode (unicast or broadcast), and the `payload` as a string. If a `Message` is expected, this payload must be deserialized from JSON into an object of type `Message` by calling `Message.fromJson(payload)`.
+- `receive()`: blocks until a message is received by the node; an object of type `Network.Message` is returned, which stores `sender_id`, `receiver_id`, send mode (unicast or broadcast), and the `payload` as a string. If a `Message` is expected, this payload must be deserialized from JSON back into an object of type `Message` by calling `Message.fromJson(payload)`.
